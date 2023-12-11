@@ -1,3 +1,6 @@
+[![en](https://img.shields.io/badge/lang-en-red.svg)](https://github.com/Jan-NiklasB/Imposter-Imposition/blob/master/LICENSE.md)
+[![en](https://img.shields.io/badge/lang-de-gray.svg)](https://github.com/Jan-NiklasB/Imposter-Imposition/blob/master/LICENSE.de.md)
+
 # Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International Public License
 
 By exercising the Licensed Rights (defined below), You accept and agree
