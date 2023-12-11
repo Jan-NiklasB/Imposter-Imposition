@@ -64,6 +64,8 @@ def create_single_page(page_nr: int, imgs: list[PpmImageFile], page_mapping: _Pa
     :type backside: bool
     :param output_landscape: True if the print sheet is in landscape orientation in relation to the single page
     :type output_landscape: bool
+    :param output_path: Path where the temporary separate pages get stored
+    :type output_path: Path
 
     """
     if output_landscape:
@@ -91,6 +93,18 @@ def create_single_page(page_nr: int, imgs: list[PpmImageFile], page_mapping: _Pa
 
 def create_duplex_page(set_counter: int, imgs: list[PpmImageFile], page_mapping: _PageMap.__subclasses__(),
                        output_path: Path):
+    """Methode that creates two pages (one duplex page pair)
+
+    :param set_counter: Integer representing the current continous number of the image-set (one set = no. of images per duplex page)
+    :type set_counter: int
+    :param imgs: List holding the number of images needed for one duplex page
+    :type imgs: list[PpmImageFile]
+    :param page_mapping: _PageMap subclass instance holding the pagemap, rotation matrix etc.
+    :type page_mapping: _PageMap.__subclasses__()
+    :param output_path: Path object holding the path where the temporary page files get stored
+    :type output_path: Path
+
+    """
     if len(imgs) == len(page_mapping.mapping_front) * 2:
         imgs_front = []
         imgs_back = []
@@ -121,6 +135,17 @@ def create_duplex_page(set_counter: int, imgs: list[PpmImageFile], page_mapping:
 
 
 def create_book(imgs: list[PpmImageFile], page_mapping: _PageMap.__subclasses__(), output_path: Path):
+    """Methode that creates all duplex pages from a given PDF file in a given page format
+
+    :param imgs: List holding all pages as PpmImageFile
+    :type imgs: list[PpmImageFile]
+    :param page_mapping: Instance of a _PageMap subclass holding the pagemap, rotation matrix, input page format and
+    print page format
+    :type page_mapping: _PageMap.__subclasses__()
+    :param output_path: Path object holding the path where the temporary page files get stored
+    :type output_path: Path
+
+    """
     pages_per_sheet = len(page_mapping.mapping_front) * 2
     i = 0
     img_sets = []
@@ -143,6 +168,12 @@ def create_book(imgs: list[PpmImageFile], page_mapping: _PageMap.__subclasses__(
 
 
 def merge_pages(output_path: Path):
+    """Methode which merges all separate page files to one PDF file
+
+    :param output_path: Path object holding the path where the merged PDF file is stored
+    :type output_path: Path
+
+    """
     merger = PdfWriter()
     filenames = os.listdir("./sites")
     for f in filenames:
